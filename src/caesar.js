@@ -11,19 +11,18 @@ const caesarModule = (function () {
       return false;
     }
     var n = 26;
-    if (shift < 0) {
-      return caesar(input, shift + n);
-    }
     if (encode === false) {
       return caesar(input, -1 * shift);
+    }    
+    if (shift < 0) {
+      return caesar(input, shift + n);
     }
     return input
       .split("")
       .map(function (c) {
         if (c.match(/[a-z]/i)) {
           var code = c.charCodeAt();
-          var move =
-            code >= 65 && code <= 90 ? 65 : code >= 97 && code <= 122 ? 97 : 0;
+          var move = code >= 65 && code <= 90 ? 65 : code >= 97 && code <= 122 ? 97 : 0;
           return String.fromCharCode(((code - move + shift) % n) + move);
         }
         return c;
@@ -31,7 +30,6 @@ const caesarModule = (function () {
       .join("")
       .toLowerCase();
   }
-
   return {
     caesar,
   };
